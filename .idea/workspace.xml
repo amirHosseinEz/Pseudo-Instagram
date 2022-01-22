@@ -5,14 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d342a4a-673d-4f9d-9be0-f6f10b87fe00" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/HibernateUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user_profile/Comment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user_profile/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user_profile/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user_profile/UserProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/main/HibernateUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/user_profile/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/main/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/CommentRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/CommentRel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +96,20 @@
       <recent name="C:\Users\Green\Desktop\codes\Instagram\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Instagram">
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Instagram.main.Main" />
+      <module name="Instagram.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Instagram.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="Instagram.main" />
@@ -120,6 +144,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Gradle.Instagram" />
         <item itemvalue="Application.Main" />
       </list>
@@ -147,16 +172,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
