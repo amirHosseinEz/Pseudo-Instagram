@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class UserProfile {
@@ -24,6 +25,9 @@ public class UserProfile {
     //TODO: add photo
     private String firstName;
     private String lastName;
+
+    @OneToMany(mappedBy = "userProfile")
+    private Set<Post> posts;
 
     private UserProfile(){
 
@@ -53,10 +57,8 @@ public class UserProfile {
         try {
             transaction = session.beginTransaction();
             session.save(userProfile);
-
             transaction.commit();
         }
-
         catch (Exception e) {
             if (transaction!=null) transaction.rollback();
             e.printStackTrace();

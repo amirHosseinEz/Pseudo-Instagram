@@ -21,14 +21,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(mappedBy = "user")
+    private UserProfile userProfile;
+
     private String username;
     private String password;
     private String phoneNum;
     private String email;
 
-    public String getUsername() {
-        return username;
-    }
 
     private User() {
     }
@@ -64,10 +64,8 @@ public class User {
         try {
             transaction = session.beginTransaction();
             session.save(user);
-
             transaction.commit();
         }
-
         catch (Exception e) {
             if (transaction!=null) transaction.rollback();
             e.printStackTrace();
@@ -98,7 +96,7 @@ public class User {
         Root<User> root = criteria.from(User.class);
         Predicate usernamePredicate = builder.equal(root.get("username"), username);
         Predicate passwordPredicate = builder.equal(root.get("password"), password);
-        criteria.select(root).where(builder.or(usernamePredicate, passwordPredicate));
+        criteria.select(root).where(builder.and(usernamePredicate, passwordPredicate));
         List<User> users = session.createQuery(criteria).getResultList();
         if(users.size() > 0){
             return users.get(0);
@@ -117,6 +115,11 @@ public class User {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
