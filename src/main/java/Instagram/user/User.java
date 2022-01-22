@@ -2,11 +2,13 @@ package Instagram.user;
 
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -46,30 +48,17 @@ public class User {
 
     public static Boolean createAndAddToDataBase(String username, String password){
         User user = new User(username, password);
-        System.out.println(username);
-        System.out.println(isUsernameUnique(username));
         if(isUsernameUnique(username)){
-            return addToDatabase(user);
+            addToDataBase(user);
+            UserProfile.createAndAddToDataBase(user);
+            return Boolean.TRUE;
         }
         else{
             return Boolean.FALSE;
         }
     }
 
-    public static Boolean isUsernameUnique(String username){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        Root<User> root = criteria.from(User.class);
-        criteria.where(builder.equal(root.get("username"), username));
-        List<User> users = session.createQuery(criteria).getResultList();
-        if(users.size() != 0){
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
-    }
-
-    public static Boolean addToDatabase(User user){
+    public static Boolean addToDataBase(User user){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
@@ -85,6 +74,47 @@ public class User {
             return Boolean.FALSE;
         } finally {
             session.close();
+        }
+        return Boolean.TRUE;
+    }
+
+    public UserProfile getUserProfile(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserProfile> criteria = builder.createQuery(UserProfile.class);
+        Root<UserProfile> root = criteria.from(UserProfile.class);
+        criteria.select(root).where(builder.equal(root.get("user"), this));
+        List<UserProfile> userProfiles = session.createQuery(criteria).getResultList();
+        if(userProfiles.size() > 0){
+            return userProfiles.get(0);
+        }
+        return null;
+    }
+
+    public static User getUserByUserPass(String username, String password){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        Predicate usernamePredicate = builder.equal(root.get("username"), username);
+        Predicate passwordPredicate = builder.equal(root.get("password"), password);
+        criteria.select(root).where(builder.or(usernamePredicate, passwordPredicate));
+        List<User> users = session.createQuery(criteria).getResultList();
+        if(users.size() > 0){
+            return users.get(0);
+        }
+        return null;
+    }
+
+    public static Boolean isUsernameUnique(String username){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root).where(builder.equal(root.get("username"), username));
+        List<User> users = session.createQuery(criteria).getResultList();
+        if(users.size() != 0){
+            return Boolean.FALSE;
         }
         return Boolean.TRUE;
     }
