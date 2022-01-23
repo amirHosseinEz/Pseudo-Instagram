@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserProfile userProfile;
 
     private String username;
@@ -88,7 +88,17 @@ public class User {
         }
         return null;
     }
-
+    public static void deleteUser(User user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.delete(user);
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+    }
     public static User getUserByUserPass(String username, String password){
         Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -202,5 +212,17 @@ public class User {
         } finally {
             session.close();
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }
