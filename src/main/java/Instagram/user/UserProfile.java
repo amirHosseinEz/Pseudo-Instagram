@@ -51,6 +51,14 @@ public class UserProfile {
         return addToDataBase(userProfile);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public static Boolean addToDataBase(UserProfile userProfile){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
