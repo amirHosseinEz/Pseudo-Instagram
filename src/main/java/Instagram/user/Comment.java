@@ -19,7 +19,7 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private UserProfile userProfile;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private Post post;
 
     private String text;
@@ -55,6 +55,7 @@ public class Comment {
     public static Boolean addToDataBase(Comment comment){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
+        comment.getPost().addposts(comment);
         try {
             transaction = session.beginTransaction();
             session.save(comment);
@@ -126,10 +127,21 @@ public class Comment {
         return createTime;
     }
 
+    public static void deleteComment(Comment comment){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.remove(comment);
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+    }
+
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
-
     @Override
     public String toString() {
         return "Comment{" +
