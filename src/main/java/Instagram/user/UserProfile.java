@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,8 +28,13 @@ public class UserProfile {
     private String lastName;
 
     @OneToMany(mappedBy = "userProfile")
-    private Set<Post> posts;
+    private List<Post> posts;
 
+    @OneToMany(mappedBy = "from")
+    private List<UserProfileRel> userProfileRelsFrom;
+
+    @OneToMany(mappedBy = "to")
+    private List<UserProfileRel> userProfileRelsTo;
     private UserProfile(){
 
     }
@@ -60,6 +66,8 @@ public class UserProfile {
     }
 
     public static Boolean addToDataBase(UserProfile userProfile){
+        userProfile.getUser().setUserProfile(userProfile);
+        userProfile.setUser(userProfile.getUser());
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
