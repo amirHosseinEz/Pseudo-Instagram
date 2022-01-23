@@ -79,6 +79,19 @@ public class Post {
 
     public void setCaption(String caption) {
         this.caption = caption;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public LocalDateTime getCreateTime() {
