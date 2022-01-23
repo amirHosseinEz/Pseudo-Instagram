@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -79,6 +81,7 @@ public class Post {
 
     public void setCaption(String caption) {
         this.caption = caption;
+
         Session session =HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
@@ -93,6 +96,25 @@ public class Post {
             session.close();
         }
     }
+    public static List<Post> getPostsOfUser(UserProfile userProfile){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Post> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from Post where userProfile_id = \'"+userProfile.getId()+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        return collection1;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -101,4 +123,5 @@ public class Post {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
 }
