@@ -90,6 +90,19 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public LocalDateTime getCreateTime() {
