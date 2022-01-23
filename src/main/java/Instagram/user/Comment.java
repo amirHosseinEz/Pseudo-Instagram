@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Comment {
@@ -67,6 +69,21 @@ public class Comment {
         }
         return Boolean.TRUE;
     }
+    public static List<Comment> getCommentsOfPost(Post post){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Comment> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from Comment where post_id = \'"+post.getId()+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        return collection1;
+    }
 
     public UserProfile getUserProfile() {
         return userProfile;
@@ -111,5 +128,16 @@ public class Comment {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", userProfile=" + userProfile +
+                ", post=" + post +
+                ", text='" + text + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }
