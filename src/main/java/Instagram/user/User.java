@@ -124,6 +124,20 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
     }
 
     public String getPassword() {
@@ -132,6 +146,19 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public String getPhoneNum() {
@@ -140,6 +167,19 @@ public class User {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public String getEmail() {
@@ -148,5 +188,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }
