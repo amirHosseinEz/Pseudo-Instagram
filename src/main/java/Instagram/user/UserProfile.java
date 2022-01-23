@@ -92,6 +92,19 @@ public class UserProfile {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public Date getDateOfBirth() {
@@ -108,6 +121,19 @@ public class UserProfile {
 
     public void setBio(String bio) {
         this.bio = bio;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public String getFirstName() {
@@ -116,6 +142,19 @@ public class UserProfile {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public String getLastName() {
@@ -124,5 +163,18 @@ public class UserProfile {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }
