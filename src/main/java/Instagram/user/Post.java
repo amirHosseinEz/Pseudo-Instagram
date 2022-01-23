@@ -24,8 +24,8 @@ public class Post {
     private LocalDateTime createTime;
     //TODO: photo
 
-    @OneToMany(mappedBy = "post")
-    private Set<Comment> comments;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comment> comments;
 
     private Post(){
 
@@ -111,9 +111,25 @@ public class Post {
         }
         return collection1;
     }
+    public static void deletePost(Post post){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.remove(post);
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+    }
 
     public Long getId() {
         return id;
+    }
+    public void addposts(Comment comment){
+        if(comments == null)
+            comments = new ArrayList<>();
+        comments.add(comment);
     }
 
     public LocalDateTime getCreateTime() {
