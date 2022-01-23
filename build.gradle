@@ -1,7 +1,10 @@
 plugins {
     id 'java'
-}
 
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+mainClassName = 'Instagram.main.Main'
 group 'org.example'
 version '1.0-SNAPSHOT'
 
@@ -17,7 +20,10 @@ dependencies {
 
 
 }
-
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 test {
     useJUnitPlatform()
 }
