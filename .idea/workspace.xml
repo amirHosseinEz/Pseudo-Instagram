@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d342a4a-673d-4f9d-9be0-f6f10b87fe00" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/SampleSecret.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/main/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/CommentRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/CommentRel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/main/SampleSecret.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample.hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,12 +81,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../javafx-sdk-17.0.1/lib/javafx-swt.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.48390806" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Green\Desktop\codes\Instagram\src\main\resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Green\Desktop\codes\Instagram\src\main\resources" />
     </key>

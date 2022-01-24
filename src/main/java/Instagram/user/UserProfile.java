@@ -23,7 +23,7 @@ public class UserProfile {
     private String nickName;
     private Date dateOfBirth;
     private String bio;
-    //TODO: add photo
+    private byte[] image;
     private String firstName;
     private String lastName;
 
@@ -183,6 +183,27 @@ public class UserProfile {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
         Session session =HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {

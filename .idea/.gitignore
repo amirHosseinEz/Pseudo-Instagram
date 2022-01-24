@@ -139,5 +139,5 @@ replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java
 
-../src/main/java/Instagram/main/Secret
+src/main/java/Instagram/main/Secret.java
 
