@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserProfilePostReaction {
@@ -37,6 +39,7 @@ public class UserProfilePostReaction {
 
     public static Boolean addToDataBase(UserProfilePostReaction userProfilePostReaction){
         Session session = HibernateUtil.getSessionFactory().openSession();
+        userProfilePostReaction.getUserProfile().addUserProfilePostReaction(userProfilePostReaction);
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -74,7 +77,53 @@ public class UserProfilePostReaction {
     public UserProfile getUserProfile() {
         return userProfile;
     }
+    public static void like(UserProfile userProfile, Post post){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<UserProfilePostReaction> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from UserProfilePostReaction where userProfile = \'"+userProfile.getId()+"\' and post = \'"+ post.getId()+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        if(collection1.isEmpty()) {
+            UserProfilePostReaction userProfilePostReaction = new UserProfilePostReaction(userProfile, post, UserProfilePostReactionType.LIKE);
+            UserProfilePostReaction.addToDataBase(userProfilePostReaction);
+        }
+        else {
+            if(collection1.get(0).getReactionType().equals(UserProfilePostReactionType.LIKE)){
+                //already liked
 
+            }
+        }
+    }
+    public static void unlike(UserProfile userProfile, Post post){              // it's not dislike!
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<UserProfilePostReaction> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from UserProfilePostReaction where userProfile = \'"+userProfile.getId()+"\' and post = \'"+ post.getId()+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        if(collection1.isEmpty()) {
+            //not liked!
+        }
+        else {
+            if(collection1.get(0).getReactionType().equals(UserProfilePostReactionType.LIKE)){
+                UserProfilePostReaction userProfilePostReaction = collection1.get(0);
+                UserProfilePostReaction.delete(userProfilePostReaction);
+            }
+        }
+    }
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }

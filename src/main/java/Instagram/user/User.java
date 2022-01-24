@@ -116,6 +116,15 @@ public class User {
         return null;
     }
 
+    public static Boolean login(String username, String password){
+        User user = getUserByUserPass(username, password);
+        if(user != null){
+            User.currentUser = user;
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
     public static Boolean isUsernameUnique(String username){
         Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();

@@ -13,10 +13,10 @@ public class CommentRel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE})
     private Comment from;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE})
     private Comment to;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +36,9 @@ public class CommentRel {
     }
 
     public static Boolean addToDataBase(CommentRel commentRel){
+        commentRel.getFrom().addCommentRelFrom(commentRel);
+        commentRel.getTo().addCommentRelFrom(commentRel);
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {

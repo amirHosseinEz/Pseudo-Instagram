@@ -26,11 +26,11 @@ public class Comment {
     private String text;
     private LocalDateTime createTime;
 
-    @OneToMany(mappedBy = "from")
-    private Set<CommentRel> commentRelsFrom;
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL)
+    private List<CommentRel> commentRelsFrom;
 
-    @OneToMany(mappedBy = "to")
-    private Set<CommentRel> commentRelsTo;
+    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL)
+    private List<CommentRel> commentRelsTo;
 
     private Comment(){
 
@@ -62,7 +62,7 @@ public class Comment {
     public static Boolean addToDataBase(Comment comment){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
-        comment.getPost().addposts(comment);
+        comment.getPost().addComment(comment);
         try {
             transaction = session.beginTransaction();
             session.save(comment);
@@ -151,14 +151,24 @@ public class Comment {
         this.createTime = createTime;
     }
 
-    public Set<CommentRel> getCommentRelsFrom() {
+    public List<CommentRel> getCommentRelsFrom() {
         return commentRelsFrom;
     }
 
-    public Set<CommentRel> getCommentRelsTo() {
+    public List<CommentRel> getCommentRelsTo() {
         return commentRelsTo;
     }
 
+    public void addCommentRelFrom(CommentRel commentRel){
+        if(commentRelsFrom == null)
+            commentRelsFrom = new ArrayList<>();
+        commentRelsFrom.add(commentRel);
+    }
+    public void addCommentRelTo(CommentRel commentRel){
+        if(commentRelsTo == null)
+            commentRelsTo = new ArrayList<>();
+        commentRelsTo.add(commentRel);
+    }
     @Override
     public String toString() {
         return "Comment{" +
