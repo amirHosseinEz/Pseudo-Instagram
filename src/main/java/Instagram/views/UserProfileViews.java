@@ -106,7 +106,7 @@ public class UserProfileViews {
             viewPostDetail(post);
         });
         if(UserProfilePostReaction.isLiked(User.currentUser.getUserProfile(), post)){
-            likeButton.setText("like");
+            likeButton.setText("liked");
             likeButton.setOnAction(e -> {
                 UserProfilePostReaction.unlike(User.currentUser.getUserProfile(), post);
                 viewPostDetail(post);
@@ -246,6 +246,7 @@ public class UserProfileViews {
         TextField text = new TextField();
         text.setMaxWidth((float)Main.screenWidth/4);
         Button addButton = new Button("add");
+        //TODO: add photo
         addButton.setOnAction(e -> {
             Post post = Post.create(User.currentUser.getUserProfile());
             Post.addToDataBase(post);
@@ -267,6 +268,7 @@ public class UserProfileViews {
         TextField text = new TextField();
         text.setMaxWidth((float)Main.screenWidth/4);
         Button editButton = new Button("edit");
+        //TODO: add photo
         editButton.setOnAction(e -> {
             post.setCaption(text.getText());
             editPost(post);
