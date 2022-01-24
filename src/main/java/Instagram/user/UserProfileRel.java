@@ -42,8 +42,6 @@ public class UserProfileRel {
         return new UserProfileRel(from, to, userProfileRelType);
     }
 
-
-
     public static void addToDataBase(UserProfileRel userProfileRel) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -221,6 +219,22 @@ public class UserProfileRel {
         }
         return collection2;
     }
+
+    public static Boolean isFollowed(UserProfile from, UserProfile to){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserProfileRel> criteria = builder.createQuery(UserProfileRel.class);
+        Root<UserProfileRel> root = criteria.from(UserProfileRel.class);
+        Predicate usernamePredicate = builder.equal(root.get("from"), from);
+        Predicate passwordPredicate = builder.equal(root.get("to"), to);
+        criteria.select(root).where(builder.and(usernamePredicate, passwordPredicate));
+        List<UserProfileRel> userProfileRels = session.createQuery(criteria).getResultList();
+        if(userProfileRels.size() > 0 && userProfileRels.get(0).getRelType().equals(UserProfileRelType.FOLLOW)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
 
     public Long getId() {
         return id;

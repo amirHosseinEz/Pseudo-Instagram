@@ -5,6 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -86,6 +89,15 @@ public class UserProfile {
 
     public void setUserProfilePostReactions(List<UserProfilePostReaction> userProfilePostReactions) {
         this.userProfilePostReactions = userProfilePostReactions;
+    }
+
+    public static List<UserProfile> getAllUserProfiles(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserProfile> criteria = builder.createQuery(UserProfile.class);
+        Root<UserProfile> root = criteria.from(UserProfile.class);
+        List<UserProfile> userProfiles = session.createQuery(criteria).getResultList();
+        return userProfiles;
     }
 
     public static Boolean createAndAddToDataBase(User user){

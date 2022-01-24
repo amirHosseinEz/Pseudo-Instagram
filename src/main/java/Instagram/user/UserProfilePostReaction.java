@@ -5,6 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +128,23 @@ public class UserProfilePostReaction {
             }
         }
     }
+
+    public static Boolean isLiked(UserProfile userProfile, Post post){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserProfilePostReaction> criteria = builder.createQuery(UserProfilePostReaction.class);
+        Root<UserProfilePostReaction> root = criteria.from(UserProfilePostReaction.class);
+        Predicate userProfilePredicate = builder.equal(root.get("userProfile"), userProfile);
+        Predicate postPredicate = builder.equal(root.get("post"), post);
+        Predicate typePredicate = builder.equal(root.get("reactionType"), UserProfilePostReactionType.LIKE);
+        criteria.select(root).where(builder.and(userProfilePredicate, postPredicate, typePredicate));
+        List<UserProfilePostReaction> userProfilePostReactions = session.createQuery(criteria).getResultList();
+        if(userProfilePostReactions.size() > 0 && userProfilePostReactions.get(0).getReactionType().equals(UserProfilePostReactionType.LIKE)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
