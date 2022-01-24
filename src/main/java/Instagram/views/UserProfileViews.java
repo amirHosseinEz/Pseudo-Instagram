@@ -61,7 +61,7 @@ public class UserProfileViews {
                     showHomePage(User.currentUser.getUserProfile());
             });
             if(UserProfilePostReaction.isLiked(User.currentUser.getUserProfile(), post)){
-                likeButton.setText("❤");
+                likeButton.setText("like");
                 likeButton.setOnAction(e -> {
                     UserProfilePostReaction.unlike(User.currentUser.getUserProfile(), post);
                     if(backTo == 1)
@@ -105,7 +105,7 @@ public class UserProfileViews {
             viewPostDetail(post);
         });
         if(UserProfilePostReaction.isLiked(User.currentUser.getUserProfile(), post)){
-            likeButton.setText("❤");
+            likeButton.setText("like");
             likeButton.setOnAction(e -> {
                 UserProfilePostReaction.unlike(User.currentUser.getUserProfile(), post);
                 viewPostDetail(post);

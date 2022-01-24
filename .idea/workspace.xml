@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d342a4a-673d-4f9d-9be0-f6f10b87fe00" name="Changes" comment="">
+    <list default="true" id="1d342a4a-673d-4f9d-9be0-f6f10b87fe00" name="Changes" comment="UserProfileRel methods">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfilePostReaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfilePostReaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfilePostReaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +120,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Instagram.main.Main" />
       <module name="Instagram.main" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Green\Downloads\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />

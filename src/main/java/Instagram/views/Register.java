@@ -26,7 +26,7 @@ public class Register {
         loginButton.setOnAction(e -> {
             if(User.login(username.getText(), password.getText())){
                 emptyLabel.setText("");
-//                UserViews.showPage(User.currentUser.getUserProfile());
+                UserProfileViews.showPage(User.currentUser.getUserProfile());
                 System.out.println("show user dashboard");
             }else{
                 emptyLabel.setText("username and password don't match, try again");
@@ -74,12 +74,8 @@ public class Register {
                 password.clear();
                 verifyPassword.clear();
             }else{
-                User user = User.create(username.getText(), password.getText());
-                if(user != null){
-                    User.addToDataBase(user);
-                    loginPage();
-                }
-                emptyLabel.setText("something went wrong");
+                User.createAndAddToDataBase(username.getText(), password.getText());
+                loginPage();
             }
         });
         Button loginButton = new Button("login");
