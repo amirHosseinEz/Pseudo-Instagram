@@ -88,6 +88,8 @@ public class User {
         }
         return null;
     }
+
+
     public static void deleteUser(User user){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

@@ -28,13 +28,17 @@ public class UserProfile {
     private String lastName;
 
     @OneToMany(mappedBy = "userProfile")
-    private List<Post> posts;
+    private Set<Post> posts;
 
     @OneToMany(mappedBy = "from")
-    private List<UserProfileRel> userProfileRelsFrom;
+    private Set<UserProfileRel> userProfileRelsFrom;
 
     @OneToMany(mappedBy = "to")
-    private List<UserProfileRel> userProfileRelsTo;
+    private Set<UserProfileRel> userProfileRelsTo;
+
+    @OneToMany(mappedBy = "userProfile")
+    private Set<UserProfilePostReaction> userProfilePostReactions;
+
     private UserProfile(){
 
     }

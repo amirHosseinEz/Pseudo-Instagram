@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Comment {
@@ -24,6 +25,12 @@ public class Comment {
 
     private String text;
     private LocalDateTime createTime;
+
+    @OneToMany(mappedBy = "from")
+    private Set<CommentRel> commentRelsFrom;
+
+    @OneToMany(mappedBy = "to")
+    private Set<CommentRel> commentRelsTo;
 
     private Comment(){
 
@@ -70,6 +77,7 @@ public class Comment {
         }
         return Boolean.TRUE;
     }
+
     public static List<Comment> getCommentsOfPost(Post post){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -142,6 +150,15 @@ public class Comment {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
+    public Set<CommentRel> getCommentRelsFrom() {
+        return commentRelsFrom;
+    }
+
+    public Set<CommentRel> getCommentRelsTo() {
+        return commentRelsTo;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

@@ -1,4 +1,3 @@
-/*
 package Instagram.user;
 
 import Instagram.main.HibernateUtil;
@@ -153,4 +152,3 @@ public class UserProfileRel {
         return id;
     }
 }
-*/

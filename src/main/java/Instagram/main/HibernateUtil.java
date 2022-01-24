@@ -1,9 +1,6 @@
 package Instagram.main;
 
-import Instagram.user.Comment;
-import Instagram.user.Post;
-import Instagram.user.User;
-import Instagram.user.UserProfile;
+import Instagram.user.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -15,6 +12,9 @@ public class HibernateUtil {
             .addAnnotatedClass(UserProfile.class)
             .addAnnotatedClass(Post.class)
             .addAnnotatedClass(Comment.class)
+            .addAnnotatedClass(UserProfileRel.class)
+            .addAnnotatedClass(UserProfilePostReaction.class)
+            .addAnnotatedClass(CommentRel.class)
             .buildSessionFactory();
 
     public static SessionFactory getSessionFactory() {

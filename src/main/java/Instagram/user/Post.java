@@ -24,8 +24,11 @@ public class Post {
     private LocalDateTime createTime;
     //TODO: photo
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "post")
+    private Set<UserProfilePostReaction> userProfilePostReactions;
 
     private Post(){
 
