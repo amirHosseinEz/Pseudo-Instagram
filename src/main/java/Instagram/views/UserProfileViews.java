@@ -54,7 +54,8 @@ public class UserProfileViews {
             });
             Button likeButton = new Button("\uD83E\uDD0D");
             likeButton.setOnAction(e -> {
-                UserProfilePostReaction.create(User.currentUser.getUserProfile(), post, UserProfilePostReactionType.LIKE);
+                UserProfilePostReaction userProfilePostReaction = UserProfilePostReaction.create(User.currentUser.getUserProfile(), post, UserProfilePostReactionType.LIKE);
+                UserProfilePostReaction.addToDataBase(userProfilePostReaction);
                 if(backTo == 1)
                     showPage(userProfile);
                 else if(backTo == 2)
@@ -111,14 +112,16 @@ public class UserProfileViews {
                 viewPostDetail(post);
             });
         }
+        displayPostLayout.getChildren().addAll(title, textLabel, dateLabel, userProfile, likeCount, likeButton);
         if(post.getUserProfile().equals(User.currentUser.getUserProfile())) {
             Button editButton = new Button("edit");
             editButton.setOnAction(e -> editPost(post));
             Button deleteButton = new Button("delete");
             deleteButton.setOnAction(e -> {
                 Post.deletePost(post);
-                viewPostDetail(post);
+                showHomePage(User.currentUser.getUserProfile());
             });
+            displayPostLayout.getChildren().addAll(editButton, deleteButton);
         }
         ObservableList<HBox> productsList = FXCollections.observableArrayList();
         for(Comment comment: comments){
@@ -136,10 +139,10 @@ public class UserProfileViews {
         commentField.setMaxWidth((float)Main.screenWidth/3);
         Button commentButton = new Button("comment");
         commentButton.setOnAction(e -> {
-            Comment.create(User.currentUser.getUserProfile(), post, commentField.getText());
+            Comment comment = Comment.create(User.currentUser.getUserProfile(), post, commentField.getText());
+            Comment.addToDataBase(comment);
             viewPostDetail(post);
         });
-        displayPostLayout.getChildren().addAll(title, textLabel, dateLabel, userProfile, likeCount, likeButton);
         displayPostLayout.getChildren().addAll(listView, commentField, commentButton, navbar());
         Scene scene = new Scene(displayPostLayout, Main.screenWidth, Main.screenHeight);
         Main.window.setScene(scene);
@@ -245,8 +248,8 @@ public class UserProfileViews {
         Button addButton = new Button("add");
         addButton.setOnAction(e -> {
             Post post = Post.create(User.currentUser.getUserProfile());
-            post.setCaption(text.getText());
             Post.addToDataBase(post);
+            post.setCaption(text.getText());
             text.clear();
         });
         createPostLayout.getChildren().addAll(textLabel, text);

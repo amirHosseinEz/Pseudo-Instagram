@@ -11,15 +11,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfilePostReaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfilePostReaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/UserProfileViews.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/UserProfileViews.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
