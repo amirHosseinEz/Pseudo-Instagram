@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.LongStream;
 
 @Entity
 public class UserProfile {
@@ -27,17 +29,18 @@ public class UserProfile {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "userProfile")
-    private Set<Post> posts;
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     @OneToMany(mappedBy = "from")
-    private Set<UserProfileRel> userProfileRelsFrom;
+    private List<UserProfileRel> userProfileRelsFrom;
 
     @OneToMany(mappedBy = "to")
-    private Set<UserProfileRel> userProfileRelsTo;
+    private List<UserProfileRel> userProfileRelsTo;
 
-    @OneToMany(mappedBy = "userProfile")
-    private Set<UserProfilePostReaction> userProfilePostReactions;
+
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    private List<UserProfilePostReaction> userProfilePostReactions;
 
     private UserProfile(){
 
@@ -51,6 +54,38 @@ public class UserProfile {
         if(user.getUserProfile() == null)
             return new UserProfile(user);
         return null;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<UserProfileRel> getUserProfileRelsFrom() {
+        return userProfileRelsFrom;
+    }
+
+    public void setUserProfileRelsFrom(List<UserProfileRel> userProfileRelsFrom) {
+        this.userProfileRelsFrom = userProfileRelsFrom;
+    }
+
+    public List<UserProfileRel> getUserProfileRelsTo() {
+        return userProfileRelsTo;
+    }
+
+    public void setUserProfileRelsTo(List<UserProfileRel> userProfileRelsTo) {
+        this.userProfileRelsTo = userProfileRelsTo;
+    }
+
+    public List<UserProfilePostReaction> getUserProfilePostReactions() {
+        return userProfilePostReactions;
+    }
+
+    public void setUserProfilePostReactions(List<UserProfilePostReaction> userProfilePostReactions) {
+        this.userProfilePostReactions = userProfilePostReactions;
     }
 
     public static Boolean createAndAddToDataBase(User user){
@@ -197,4 +232,15 @@ public class UserProfile {
             session.close();
         }
     }
+    public void addposts(Post post){
+        if(posts == null)
+            posts = new ArrayList<>();
+        posts.add(post);
+    }
+    public void addUserProfilePostReaction(UserProfilePostReaction userProfilePostReaction){
+        if(userProfilePostReactions == null)
+            userProfilePostReactions = new ArrayList<>();
+        userProfilePostReactions.add(userProfilePostReaction);
+    }
+
 }

@@ -17,7 +17,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     private UserProfile userProfile;
 
     private String caption;
@@ -27,8 +27,8 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "post")
-    private Set<UserProfilePostReaction> userProfilePostReactions;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<UserProfilePostReaction> userProfilePostReactions;
 
     private Post(){
 
@@ -53,6 +53,7 @@ public class Post {
     }
 
     public static Boolean addToDataBase(Post post){
+        post.getUserProfile().addposts(post);
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
@@ -99,6 +100,21 @@ public class Post {
             session.close();
         }
     }
+    public static int getLikesCount(Post post){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<UserProfilePostReaction> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from UserProfilePostReaction where post = \'"+post.getId()+"\' and reactionType = \'"+ UserProfilePostReactionType.LIKE+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        return collection1.size();
+    }
     public static List<Post> getPostsOfUser(UserProfile userProfile){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -125,14 +141,26 @@ public class Post {
             session.close();
         }
     }
-
+    public static List<Post> getFriendsPosts(UserProfile userProfile){
+        List<Post> colloction = new ArrayList<>();
+        List<UserProfile> freinds = UserProfileRel.getFollowings(userProfile);
+        for (UserProfile freind: freinds){
+            colloction.addAll(Post.getPostsOfUser(freind));
+        }
+        return colloction;
+    }
     public Long getId() {
         return id;
     }
-    public void addposts(Comment comment){
+    public void addComment(Comment comment){
         if(comments == null)
             comments = new ArrayList<>();
         comments.add(comment);
+    }
+    public void addUserProfilePostReaction(UserProfilePostReaction userProfilePostReaction){
+        if(userProfilePostReactions == null)
+            userProfilePostReactions = new ArrayList<>();
+        userProfilePostReactions.add(userProfilePostReaction);
     }
 
     public LocalDateTime getCreateTime() {
