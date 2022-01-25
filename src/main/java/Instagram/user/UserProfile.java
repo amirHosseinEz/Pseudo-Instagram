@@ -3,6 +3,8 @@ package Instagram.user;
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -30,7 +32,8 @@ public class UserProfile {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Post> posts;
 
     @OneToMany(mappedBy = "from")
@@ -90,10 +93,24 @@ public class UserProfile {
     }
 
     public static List<UserProfile> getAllUserProfiles(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
+       /* Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<UserProfile> criteria = builder.createQuery(UserProfile.class);
-        return session.createQuery(criteria).getResultList();
+        return session.createQuery(criteria).getResultList();*/
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction1 = null;
+        List<UserProfile> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from UserProfile ");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        return collection1;
     }
 
     public static Boolean createAndAddToDataBase(User user){
