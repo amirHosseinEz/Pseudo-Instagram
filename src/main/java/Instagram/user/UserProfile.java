@@ -168,7 +168,7 @@ public class UserProfile {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -185,6 +185,19 @@ public class UserProfile {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.merge(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public String getBio() {
@@ -197,7 +210,7 @@ public class UserProfile {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -218,7 +231,7 @@ public class UserProfile {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -239,7 +252,7 @@ public class UserProfile {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -260,7 +273,7 @@ public class UserProfile {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {

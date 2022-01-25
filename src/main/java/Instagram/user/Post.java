@@ -28,9 +28,10 @@ public class Post {
     private UserProfile userProfile;
 
     private String caption;
+
     private LocalDateTime createTime;
     //TODO: photo
-
+    private byte[] photo;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
 
@@ -97,7 +98,7 @@ public class Post {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -121,6 +122,29 @@ public class Post {
             session.close();
         }
         return collection1.size();
+    }
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+
+        Session session =HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.merge(this);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
     public static List<Post> getPostsOfUser(UserProfile userProfile){
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -4,7 +4,10 @@ import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class CommentRel {
@@ -13,10 +16,10 @@ public class CommentRel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Comment from;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Comment to;
 
     @Enumerated(EnumType.STRING)
@@ -72,6 +75,23 @@ public class CommentRel {
             session.close();
         }
         return Boolean.TRUE;
+    }
+    public static Comment getMainComment(Comment comment){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<CommentRel> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from CommentRel where from_id = \'"+comment.getId()+"\' and relType = \'"+ CommentRelType.REPLAY+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        if(collection1.isEmpty())
+            return null;
+        return collection1.get(0).getTo();
     }
 
     public Comment getFrom() {

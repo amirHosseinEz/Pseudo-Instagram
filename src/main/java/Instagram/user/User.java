@@ -151,7 +151,7 @@ public class User {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -173,7 +173,7 @@ public class User {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -194,7 +194,7 @@ public class User {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {
@@ -216,7 +216,7 @@ public class User {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(this);
+            session.merge(this);
             transaction.commit();
         }
         catch (Exception e) {

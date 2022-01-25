@@ -3,6 +3,8 @@ package Instagram.user;
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.Set;
 @Entity
 @Proxy(lazy=false)
 public class Comment {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +31,12 @@ public class Comment {
     private String text;
     private LocalDateTime createTime;
 
-    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<CommentRel> commentRelsFrom;
 
-    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<CommentRel> commentRelsTo;
 
     public Comment(){
@@ -94,6 +99,9 @@ public class Comment {
             session.close();
         }
         return collection1;
+    }
+    public Long getId() {
+        return id;
     }
 
     public UserProfile getUserProfile() {
@@ -171,6 +179,24 @@ public class Comment {
             commentRelsTo = new ArrayList<>();
         commentRelsTo.add(commentRel);
     }
+    public static Comment getCommentFromId(Long id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Comment> collection1 = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            Query query1 = session.createQuery("from Comment where id = \'"+id+"\'");
+            collection1 = query1.getResultList();
+            session.getTransaction().commit();
+        }
+        finally {
+            session.close();
+        }
+        if(collection1.isEmpty())
+            return null;
+        return collection1.get(0);
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
