@@ -211,7 +211,7 @@ public class UserProfileRel {
             collection1 = query1.getResultList();
             session.getTransaction().commit();
             for(UserProfileRel userProfileRel: collection1){
-                collection2.add(userProfileRel.getFrom());
+                collection2.add(userProfileRel.getTo());
             }
         }
         finally {
@@ -235,6 +235,20 @@ public class UserProfileRel {
         return Boolean.FALSE;
     }
 
+    public static Boolean isBlocked(UserProfile from, UserProfile to){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserProfileRel> criteria = builder.createQuery(UserProfileRel.class);
+        Root<UserProfileRel> root = criteria.from(UserProfileRel.class);
+        Predicate usernamePredicate = builder.equal(root.get("from"), from);
+        Predicate passwordPredicate = builder.equal(root.get("to"), to);
+        criteria.select(root).where(builder.and(usernamePredicate, passwordPredicate));
+        List<UserProfileRel> userProfileRels = session.createQuery(criteria).getResultList();
+        if(userProfileRels.size() > 0 && userProfileRels.get(0).getRelType().equals(UserProfileRelType.BLOCK)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 
     public Long getId() {
         return id;

@@ -3,18 +3,17 @@ package Instagram.user;
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.LongStream;
 
 @Entity
+@Proxy(lazy=false)
 public class UserProfile {
 
     @Id
@@ -24,7 +23,6 @@ public class UserProfile {
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private User user;
 
-    private String userId;
     private String nickName;
     private Date dateOfBirth;
     private String bio;
@@ -45,7 +43,7 @@ public class UserProfile {
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<UserProfilePostReaction> userProfilePostReactions;
 
-    private UserProfile(){
+    public UserProfile(){
 
     }
 
@@ -60,7 +58,7 @@ public class UserProfile {
     }
 
     public List<Post> getPosts() {
-        return posts;
+        return this.posts;
     }
 
     public void setPosts(List<Post> posts) {
@@ -95,9 +93,7 @@ public class UserProfile {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<UserProfile> criteria = builder.createQuery(UserProfile.class);
-        Root<UserProfile> root = criteria.from(UserProfile.class);
-        List<UserProfile> userProfiles = session.createQuery(criteria).getResultList();
-        return userProfiles;
+        return session.createQuery(criteria).getResultList();
     }
 
     public static Boolean createAndAddToDataBase(User user){
@@ -143,14 +139,6 @@ public class UserProfile {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getNickName() {
@@ -275,6 +263,15 @@ public class UserProfile {
         if(userProfilePostReactions == null)
             userProfilePostReactions = new ArrayList<>();
         userProfilePostReactions.add(userProfilePostReaction);
+    }
+
+    @Override
+    public String toString() {
+        return this.nickName + " " + this.user.getUsername();
+    }
+
+    public Boolean isEqual(UserProfile userProfile){
+        return this.getId().equals(userProfile.getId());
     }
 
 }

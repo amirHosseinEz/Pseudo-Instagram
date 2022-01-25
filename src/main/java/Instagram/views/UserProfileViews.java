@@ -92,6 +92,7 @@ public class UserProfileViews {
     }
 
     public static void viewPostDetail(Post post){
+        //TODO: comment reply
         List<Comment> comments = Comment.getCommentsOfPost(post);
         VBox displayPostLayout = new VBox(Main.space);
         displayPostLayout.setAlignment(Pos.CENTER);
@@ -113,7 +114,7 @@ public class UserProfileViews {
             });
         }
         displayPostLayout.getChildren().addAll(title, textLabel, dateLabel, userProfile, likeCount, likeButton);
-        if(post.getUserProfile().equals(User.currentUser.getUserProfile())) {
+        if(post.getUserProfile().isEqual(User.currentUser.getUserProfile())) {
             Button editButton = new Button("edit");
             editButton.setOnAction(e -> editPost(post));
             Button deleteButton = new Button("delete");
@@ -159,7 +160,7 @@ public class UserProfileViews {
             Button userProfileButton = new Button(userProfile.toString());
             userProfileButton.setOnAction(e -> showPage(userProfile));
             hbox.getChildren().addAll(userProfileButton);
-            if(userProfile != User.currentUser.getUserProfile()){
+            if(!userProfile.isEqual(User.currentUser.getUserProfile())){
                 Button followButton = new Button("follow");
                 followButton.setOnAction(e ->{
                     UserProfileRel.follow(User.currentUser.getUserProfile(), userProfile);
@@ -172,7 +173,19 @@ public class UserProfileViews {
                         showAllUsers();
                     });
                 }
-                hbox.getChildren().addAll(followButton);
+                Button blockButton = new Button("block");
+                blockButton.setOnAction(e ->{
+                    UserProfileRel.block(User.currentUser.getUserProfile(), userProfile);
+                    showPage(userProfile);
+                });
+                if(UserProfileRel.isBlocked(User.currentUser.getUserProfile(), userProfile)){
+                    blockButton.setText("unblock");
+                    blockButton.setOnAction(e ->{
+                        UserProfileRel.unBlock(User.currentUser.getUserProfile(), userProfile);
+                        showHomePage(User.currentUser.getUserProfile());
+                    });
+                }
+                hbox.getChildren().addAll(followButton, blockButton);
             }
             productsList.add(hbox);
         }
@@ -184,24 +197,14 @@ public class UserProfileViews {
 
     public static void showHomePage(UserProfile userProfile){
         List<Post> posts = Post.getFriendsPosts(userProfile);
+        System.out.println(posts.size());
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         VBox userPageLayout = displayPosts(posts, Boolean.FALSE, userProfile, 2);
         Label userProfileLabel = new Label(userProfile.toString());
         userPageLayout.getChildren().addAll(userProfileLabel);
-        if(userProfile != User.currentUser.getUserProfile()){
-            Button followButton = new Button("follow");
-            followButton.setOnAction(e ->{
-                UserProfileRel.follow(User.currentUser.getUserProfile(), userProfile);
-                showPage(userProfile);
-            });
-            if(UserProfileRel.isFollowed(User.currentUser.getUserProfile(), userProfile)){
-                followButton.setText("unfollow");
-                followButton.setOnAction(e ->{
-                    UserProfileRel.unFollow(User.currentUser.getUserProfile(), userProfile);
-                    showPage(userProfile);
-                });
-            }
-            userPageLayout.getChildren().addAll(followButton);
-        }
         userPageLayout.getChildren().addAll(navbar());
         Scene page = new Scene(userPageLayout, Main.screenWidth, Main.screenHeight);
         Main.window.setScene(page);
@@ -213,13 +216,10 @@ public class UserProfileViews {
         if(userProfile.getUser().equals(User.currentUser)){
             edit = Boolean.TRUE;
         }
-        System.out.println(userProfile);
-        System.out.println(User.currentUser.getUserProfile());
-        System.out.println("this is edit:" + edit);
         VBox userPageLayout = displayPosts(posts, edit, userProfile, 1);
         Label userProfileLabel = new Label(userProfile.toString());
         userPageLayout.getChildren().addAll(userProfileLabel);
-        if(userProfile != User.currentUser.getUserProfile()){
+        if(!userProfile.isEqual(User.currentUser.getUserProfile())){
             Button followButton = new Button("follow");
             followButton.setOnAction(e ->{
                 UserProfileRel.follow(User.currentUser.getUserProfile(), userProfile);
@@ -232,7 +232,19 @@ public class UserProfileViews {
                     showPage(userProfile);
                 });
             }
-            userPageLayout.getChildren().addAll(followButton);
+            Button blockButton = new Button("block");
+            blockButton.setOnAction(e ->{
+                UserProfileRel.block(User.currentUser.getUserProfile(), userProfile);
+                showHomePage(User.currentUser.getUserProfile());
+            });
+            if(UserProfileRel.isBlocked(User.currentUser.getUserProfile(), userProfile)){
+                blockButton.setText("unblock");
+                blockButton.setOnAction(e ->{
+                    UserProfileRel.unBlock(User.currentUser.getUserProfile(), userProfile);
+                    showHomePage(User.currentUser.getUserProfile());
+                });
+            }
+            userPageLayout.getChildren().addAll(followButton, blockButton);
         }
         userPageLayout.getChildren().addAll(navbar());
         Scene page = new Scene(userPageLayout, Main.screenWidth, Main.screenHeight);

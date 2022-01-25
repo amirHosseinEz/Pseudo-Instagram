@@ -3,14 +3,21 @@ package Instagram.user;
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@Proxy(lazy=false)
 public class Post {
 
     @Id
@@ -24,13 +31,13 @@ public class Post {
     private LocalDateTime createTime;
     //TODO: photo
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<UserProfilePostReaction> userProfilePostReactions;
 
-    private Post(){
+    public Post(){
 
     }
 
@@ -117,18 +124,11 @@ public class Post {
     }
     public static List<Post> getPostsOfUser(UserProfile userProfile){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        List<Post> collection1 = new ArrayList<>();
-        try {
-            session.beginTransaction();
-            Query query1 = session.createQuery("from Post where userProfile_id = \'"+userProfile.getId()+"\'");
-            collection1 = query1.getResultList();
-            session.getTransaction().commit();
-        }
-        finally {
-            session.close();
-        }
-        return collection1;
+        session.beginTransaction();
+        List<Post> posts = userProfile.getPosts();
+        session.getTransaction().commit();
+        session.close();
+        return posts;
     }
     public static void deletePost(Post post){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -141,13 +141,21 @@ public class Post {
             session.close();
         }
     }
+
+    @Transactional
     public static List<Post> getFriendsPosts(UserProfile userProfile){
-        List<Post> colloction = new ArrayList<>();
-        List<UserProfile> freinds = UserProfileRel.getFollowings(userProfile);
-        for (UserProfile freind: freinds){
-            colloction.addAll(Post.getPostsOfUser(freind));
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        List<UserProfile> userProfiles = UserProfileRel.getFollowings(userProfile);
+        List<Post> posts = new ArrayList<>();
+        System.out.println(userProfiles.size());
+        for(UserProfile up: UserProfileRel.getFollowings(userProfile)){
+//            System.out.println(Post.getPostsOfUser(up).size());
+            posts.addAll(up.getPosts());
         }
-        return colloction;
+        session.getTransaction().commit();
+        session.close();
+        return posts;
     }
     public Long getId() {
         return id;

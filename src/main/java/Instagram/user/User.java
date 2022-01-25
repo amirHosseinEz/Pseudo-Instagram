@@ -4,6 +4,7 @@ import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,6 +14,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Entity
+@Proxy(lazy=false)
 public class User {
 
     public static User currentUser;
@@ -30,7 +32,7 @@ public class User {
     private String email;
 
 
-    private User() {
+    public User() {
     }
 
     private User(String username, String password) {

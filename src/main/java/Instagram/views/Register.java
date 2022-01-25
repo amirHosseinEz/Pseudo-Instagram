@@ -48,9 +48,6 @@ public class Register {
         Label usernameLabel = new Label("Enter username");
         TextField username = new TextField();
         username.setMaxWidth((float)Main.screenWidth/4);
-        Label userIdLabel = new Label("Enter user id");
-        TextField userId = new TextField();
-        userId.setMaxWidth((float) Main.screenWidth/4);
         Label passwordLabel = new Label("Enter password");
         TextField password = new TextField();
         password.setMaxWidth((float) Main.screenWidth/4);
@@ -60,14 +57,12 @@ public class Register {
         Label emptyLabel = new Label("");
         Button registerButton = new Button("register");
         registerButton.setOnAction(e -> {
-            if(!User.isUsernameUnique(username.getText()) && User.isUsernameUnique(userId.getText())) {
+            if(!User.isUsernameUnique(username.getText())) {
                 emptyLabel.setText("Username must be unique");
                 username.clear();
                 password.clear();
                 verifyPassword.clear();
-            }else if(!User.isUsernameUnique(userId.getText())){
-                emptyLabel.setText("user id must be unique");
-            } else if(password.getText().equals("")){
+            }else if(password.getText().equals("")){
                 emptyLabel.setText("please enter a password");
             }else if(!password.getText().equals(verifyPassword.getText())){
                 emptyLabel.setText("passwords didn't match, try again!");
@@ -80,7 +75,7 @@ public class Register {
         });
         Button loginButton = new Button("login");
         loginButton.setOnAction(e -> loginPage());
-        registerLayout.getChildren().addAll(title, usernameLabel, username, userIdLabel, userId, passwordLabel, password);
+        registerLayout.getChildren().addAll(title, usernameLabel, username, passwordLabel, password);
         registerLayout.getChildren().addAll(verifyPasswordLabel, verifyPassword, emptyLabel, registerButton, loginButton);
         registerLayout.setAlignment(Pos.CENTER);
         Scene registerScene = new Scene(registerLayout, Main.screenWidth, Main.screenHeight);

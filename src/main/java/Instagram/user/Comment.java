@@ -3,6 +3,7 @@ package Instagram.user;
 import Instagram.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Proxy(lazy=false)
 public class Comment {
 
     @Id
@@ -32,7 +34,7 @@ public class Comment {
     @OneToMany(mappedBy = "to", cascade = CascadeType.ALL)
     private List<CommentRel> commentRelsTo;
 
-    private Comment(){
+    public Comment(){
 
     }
 

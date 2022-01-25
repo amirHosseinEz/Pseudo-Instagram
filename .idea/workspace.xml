@@ -10,9 +10,21 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/user/UserProfileRel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/UserProfileViews.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Instagram/views/UserProfileViews.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/user/UserProfileRel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Instagram/views/UserProfileViews.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
